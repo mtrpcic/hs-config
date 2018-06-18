@@ -7,7 +7,7 @@ local hyper = {
 local spoons = {
     ConfigReloader = true,
     WindowManagement = true,
-    ScreenManagement = false,
+    AppLauncher = true,
     SpacesManagement = false,
     WindowSnapping = false
 }

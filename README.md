@@ -58,6 +58,8 @@ Sometimes in the heat of the moment, you just jump to the mouse. This config inc
 ##### AppLauncher
 You can define one-command shortcuts to open any applications here. There are no standard hotkeys, but you can define any hotkey you want (just be careful you don't conflict with one of the defined keys above).
 
+Apps are opened with a "Launch or Focus" directive. If the app is already opened, the most recently focused window will be given focus.
+
 
 ### Pro Tips
 1. Download [Karabiner](https://pqrs.org/osx/karabiner/) and set Caps Lock to your primary keybind.
