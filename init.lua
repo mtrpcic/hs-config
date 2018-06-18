@@ -4,12 +4,17 @@ local hyper = {
     secondary = {"cmd", "alt", "ctrl", "shift"}
 }
 
+-- unused currently
+local config = {
+    DisableWindowAnimations = true
+}
+
 local spoons = {
     ConfigReloader = true,
-    WindowManagement = true,
+    WindowGridSnapping = true,
+    --WindowMouseSnapping = true,
     AppLauncher = true,
-    SpacesManagement = false,
-    WindowSnapping = false
+    SpacesManagement = false
 }
 
 -- Import Configured Spoons

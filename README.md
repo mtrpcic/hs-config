@@ -57,6 +57,13 @@ Sometimes in the heat of the moment, you just jump to the mouse. This config inc
 
 |Key Binding|Action|
 |---|---|
+|drag > top| Snap window to full screen |
+|drag > top + left| Snap window to 1/4 screen, anchored top left|
+|drag > top + right| Snap window to 1/4 screen, achored top right|
+|drag > left| Snap window to 1/2 screen, anchored left|
+|drag > right| Snap window to 1/2 screen, anchored right|
+|drag > bottom + left| Snap window to 1/4 screen, anchored left|
+|drag > bottom + right| Snap window to 1/4 screen, anchored right|
 |secondary + M| Turn off all mouse handlers for window snapping.<br /> You can turn them back on by reloading the config. |
 
 ##### AppLauncher
