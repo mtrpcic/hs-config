@@ -66,7 +66,7 @@ Apps are opened with a "Launch or Focus" directive. If the app is already opened
 
 |Key Binding|Action|
 |---|---|
-|(primary|secondary) + ?| Customize app launcher shortcuts. |
+|(primary/secondary) + ?| Customize app launcher shortcuts. |
 
 
 ### Pro Tips
