@@ -3,7 +3,7 @@ local obj = {}
 obj.__index = obj
 
 -- Spoon Metadata
-obj.name = "ConfigReloader"
+obj.name = "AppLauncher"
 obj.version = "1.0"
 obj.author = "Mike Trpcic"
 
