@@ -57,7 +57,7 @@ Sometimes in the heat of the moment, you just jump to the mouse. This config inc
 
 |Key Binding|Action|
 |---|---|
-|secondary + M| Turn off all mouse handlers for window snapping. You can turn them back on by reloading the config. |
+|secondary + M| Turn off all mouse handlers for window snapping.<br /> You can turn them back on by reloading the config. |
 
 ##### AppLauncher
 You can define one-command shortcuts to open any applications here. There are no standard hotkeys, but you can define any hotkey you want (just be careful you don't conflict with one of the defined keys above).
