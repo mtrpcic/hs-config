@@ -32,7 +32,7 @@ obj.mouseEvents = {
 
 obj.activeEvents = {}
 obj.windowTitlebarHeight = 21
-obj.monitorEdgeSensitivity = 1
+obj.monitorEdgeSensitivity = 5
 
 -- Utility Methods
 function round(num)
@@ -122,9 +122,9 @@ function obj:onMouseUp()
         local win = getActiveWindow()
         local max = win:screen():frame()
 
-        if round(m.x) == 0 or round(m.x) == max.w or round(m.y) == 0 or round(m.y) == max.h then
-            self:applySnap(win, m, max)
-        end
+        --if round(m.x) == 0 or round(m.x) == max.w or round(m.y) == 0 or round(m.y) == max.h then
+        self:applySnap(win, m, max)
+        --end
 
         self.draggingStatus = false
         self.draggingWindow = nil
@@ -138,8 +138,10 @@ function obj:applySnap(win, coords, max)
     local height = max.h
     local x = 0
     local y = 0
+    local flag = false
 
     if self:isMouseAtTop(coords, max) then
+        flag = true
         if self:isMouseAtLeft(coords, max) or self:isMouseAtRight(coords, max) then
             height = height / 2
         end
@@ -147,27 +149,29 @@ function obj:applySnap(win, coords, max)
 
     if self:isMouseAtBottom(coords, max) then
         height = height / 2
-        y = height / 2
+        y = height
+        flag = true
     end
 
     if self:isMouseAtLeft(coords, max) then
         width = width / 2
+        flag = true
     end
 
     if self:isMouseAtRight(coords, max) then
         width = width / 2
-        x = width / 2
+        x = width
+        flag = true
     end
 
-    print(width, height)
-    print(x,y,width,height)
-
-    local frame = win:frame()
-    frame.x = round(x)
-    frame.y = round(y)
-    frame.w = round(width)
-    frame.h = round(height)
-    win:setFrameWithWorkarounds(frame)
+    if flag then
+        local frame = win:frame()
+        frame.x = round(x)
+        frame.y = round(y)
+        frame.w = round(width)
+        frame.h = round(height)
+        win:setFrameWithWorkarounds(frame)
+    end
 end
 
 function obj:start()
