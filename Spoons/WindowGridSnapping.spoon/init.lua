@@ -22,7 +22,9 @@ obj.hotkeys = {
         up    = "flexUp",
         down  = "flexDown",
         M     = "maximize",
-        S     = "snap"
+        S     = "snap",
+        N     = "nextScreen",
+        P     = "prevScreen"
     },
 
     secondary = {
@@ -38,6 +40,7 @@ function getActiveWindow()
     return hs.application.frontmostApplication():focusedWindow()    
 end
 
+-- Spoon Methods
 function obj:windowAtTop(win)
     local cell = hs.grid.get(win)
     return cell.y == 0
@@ -58,7 +61,6 @@ function obj:windowAtRight(win)
     return (cell.x + cell.w) == self.grid.columns
 end
 
--- Spoon Methods
 function obj:bindHotkeys(hyper)
     local hyper_types = {"primary", "secondary"}
     local def = {}
@@ -141,6 +143,16 @@ end
 
 function obj:moveDown()
     hs.grid.pushWindowDown(getActiveWindow())
+end
+
+function obj:nextScreen()
+    local win = getActiveWindow()
+    win:moveToScreen(win:screen():next())
+end
+
+function obj:prevScreen()
+    local win = getActiveWindow()
+    win:moveToScreen(win:screen():previous())
 end
 
 function obj:start()

@@ -25,7 +25,6 @@ obj.hotkeys = {
 
 -- Internal Variables
 obj.mouseEvents = {
-    ['leftMouseDown'] = "onMouseDown",
     ['leftMouseDragged'] = "onMouseDrag",
     ['leftMouseUp'] = "onMouseUp"
 }
@@ -87,11 +86,6 @@ end
 
 function obj:isMouseAtRight(coords, frame)
     return coords.x > frame.w - self.monitorEdgeSensitivity
-end
-
-
-function obj:onMouseDown()
-    
 end
 
 function obj:onMouseDrag()

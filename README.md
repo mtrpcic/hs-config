@@ -34,7 +34,7 @@ This Hammerspoon setup will automatically reload the configuration
 
 |Key Binding|Action|
 |---|---|
-|primary + R|Manually tell Hammerspoon to reload the config|
+|`primary + R`|Manually tell Hammerspoon to reload the config|
 
 ##### Window Grid
 This config also includes a window grid setup. You can snap windows to the grid, move them around, and resize them all with keyboard shortcuts. These operations always take action on the currently focused window. If that window is unable to be resized (like certain system modals), nothing will happen.
@@ -43,6 +43,8 @@ This config also includes a window grid setup. You can snap windows to the grid,
 |---|---|
 |`primary + S`| Snap the current window to the nearest grid cell|
 |`primary + M`| Maximize the current window (take up the full screen without going "full screen")|
+|`primary + N`| Move the current window to the next screen|
+|`primary + P`| Move the current window to the previous screen|
 |`primary + up`| Extend the window up one cell. If the window is at the top of the screen, the bottom will move up.|
 |`primary + down`| Extend the window down one cell. If the window is at the bottom of the screen, the top will move down.|
 |`primary + left`| Extend the window left one cell. If the window is at the left of the screen, the right will move left.|
@@ -52,19 +54,21 @@ This config also includes a window grid setup. You can snap windows to the grid,
 |`secondary + left`| Move the current active window left one cell|
 |`secondary + right`| Move the current active window right one cell|
 
-##### Window Snapping
-Sometimes in the heat of the moment, you just jump to the mouse. This config includes mouse-based window snapping. If you drag a window to either side of the screen, 
+##### Window Snapping (In Dev)
+Sometimes in the heat of the moment, you just jump to the mouse. This config includes mouse-based window snapping. This feature is currently disabled, pending some bug fixes for multi-monitor setups
 
 |Key Binding|Action|
 |---|---|
-|drag > top| Snap window to full screen |
-|drag > top + left| Snap window to 1/4 screen, anchored top left|
-|drag > top + right| Snap window to 1/4 screen, achored top right|
-|drag > left| Snap window to 1/2 screen, anchored left|
-|drag > right| Snap window to 1/2 screen, anchored right|
-|drag > bottom + left| Snap window to 1/4 screen, anchored left|
-|drag > bottom + right| Snap window to 1/4 screen, anchored right|
-|secondary + M| Turn off all mouse handlers for window snapping.<br /> You can turn them back on by reloading the config. |
+|`drag > top`| Snap window to full screen |
+|`drag > top + left`| Snap window to 1/4 screen, anchored top left|
+|`drag > top + right`| Snap window to 1/4 screen, achored top right|
+|`drag > left`| Snap window to 1/2 screen, anchored left|
+|`drag > right`| Snap window to 1/2 screen, anchored right|
+|`drag > bottom + left`| Snap window to 1/4 screen, anchored left|
+|`drag > bottom + right`| Snap window to 1/4 screen, anchored right|
+|`secondary + M`| Turn off all mouse handlers for window snapping.<br /> You can turn them back on by reloading the config. |
+
+_Note: Window Snapping currently works, but has issues with multiple monitors._
 
 ##### AppLauncher
 You can define one-command shortcuts to open any applications here. There are no standard hotkeys, but you can define any hotkey you want (just be careful you don't conflict with one of the defined keys above).
@@ -73,7 +77,19 @@ Apps are opened with a "Launch or Focus" directive. If the app is already opened
 
 |Key Binding|Action|
 |---|---|
-|(primary/secondary) + ?| Customize app launcher shortcuts. |
+|`(primary/secondary) + ?`| Customize app launcher shortcuts. |
+
+##### Workspaces (In Dev)
+Workspaces makes use of the undocumented [Spaces API](https://github.com/asmagill/hs._asm.undocumented.spaces), and allows you to name and define a list of applications that should be available for a specific space.
+
+|Key Binding|Action|
+|---|---|
+|`primary + w`| Reset the workspace that has been assigned to this space |
+
+##### Third Party Spoons/Modules
+All of the Spoons included in this repository are custom built, but it's easy to include third party Spoons as well. If they adhere to the recommended API format, you can simply install the Spoon and then add it to the `spoons` table in `init.lua` and it will automatically be imported, keybound, and started. 
+
+If you want to include a non-standard spoon or module, install it as usual, and then add custom code to the bottom of `init.lua` to handle inegrating it into your setup.
 
 
 ### Pro Tips
