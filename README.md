@@ -43,14 +43,14 @@ This config also includes a window grid setup. You can snap windows to the grid,
 |---|---|
 |`primary + S`| Snap the current window to the nearest grid cell|
 |`primary + M`| Maximize the current window (take up the full screen without going "full screen")|
-|`primary + up`| |
-|`primary + down`||
-|`primary + left`||
-|`primary + right`||
-|`secondary + up`||
-|`secondary + down`||
-|`secondary + left`||
-|`secondary + right`||
+|`primary + up`| Extend the window up one cell. If the window is at the top of the screen, the bottom will move up.|
+|`primary + down`| Extend the window down one cell. If the window is at the bottom of the screen, the top will move down.|
+|`primary + left`| Extend the window left one cell. If the window is at the left of the screen, the right will move left.|
+|`primary + right`| Extend the window right one cell. If the window is at the right of the screen, the left will move right.|
+|`secondary + up`| Move the current active window up one cell|
+|`secondary + down`| Move the current active window down one cell|
+|`secondary + left`| Move the current active window left one cell|
+|`secondary + right`| Move the current active window right one cell|
 
 ##### Window Snapping
 Sometimes in the heat of the moment, you just jump to the mouse. This config includes mouse-based window snapping. If you drag a window to either side of the screen, 
