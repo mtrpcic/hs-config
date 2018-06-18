@@ -21,7 +21,7 @@ You define your main key mapping modifier in `init.lua` (named `hyper`. The dafa
 ```lua
 local hyper = {
     primary = {"cmd", "alt", "ctrl"},
-    secondary = {"cmd", "alt", "shift"}
+    secondary = {"cmd", "alt", "ctrl", "shift"}
 }
 ```
 
