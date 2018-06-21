@@ -78,13 +78,30 @@ Apps are opened with a "Launch or Focus" directive. If the app is already opened
 |Key Binding|Action|
 |---|---|
 |`(primary/secondary) + ?`| Customize app launcher shortcuts. |
+|`primary + C`| (Default Config) Open Google Chrome. This can be changed in `Spoons/AppLaunder.spoon/init.lua` |
+|`primary + T`| (Default Config) Open iTerm2. This can be changed in `Spoons/AppLaunder.spoon/init.lua` |
 
 ##### Workspaces (In Dev)
 Workspaces makes use of the undocumented [Spaces API](https://github.com/asmagill/hs._asm.undocumented.spaces), and allows you to name and define a list of applications that should be available for a specific space.
 
+Define workspaces in `Spoons/Workspaces.spoon/init.lua` with the following format:
+
+```lua
+obj.workspaces = {
+    DevWork = {
+        onStart = "~/.something/command.sh"
+        Applications = {
+            ["Google Chrome"] = {}
+        }
+        onComplete = "~/.something/command.sh"
+    }
+}
+```
+
 |Key Binding|Action|
 |---|---|
-|`primary + w`| Reset the workspace that has been assigned to this space |
+|`primary + W`| Open a text dialog, allowing you to name the workspace you would like to apply to the current space |
+|`secondary + W`| Reset the workspace that has been assigned to this space. If no Workspace is assigned, you will be prompted for one |
 
 ##### Third Party Spoons/Modules
 All of the Spoons included in this repository are custom built, but it's easy to include third party Spoons as well. If they adhere to the recommended API format, you can simply install the Spoon and then add it to the `spoons` table in `init.lua` and it will automatically be imported, keybound, and started. 
