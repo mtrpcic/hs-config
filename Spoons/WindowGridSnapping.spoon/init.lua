@@ -9,8 +9,8 @@ obj.author = "Mike Trpcic"
 
 -- Spoon Configuration Variables
 obj.grid = {
-    rows = 4,
-    columns = 6,
+    rows = 3,
+    columns = 4,
     margins = 1
 }
 
