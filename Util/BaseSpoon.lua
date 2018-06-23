@@ -5,7 +5,9 @@
 -- methods that all internal spoons will extend.
 
 local BaseSpoon = {}
-BaseSpoon.__index = BaseSpoon
+-- BaseSpoon.__index = BaseSpoon
+BaseSpoon_mt = { __index = BaseSpoon }
+
 
 -- Default Metadata fields
 BaseSpoon.name = nil
@@ -61,5 +63,12 @@ end
 function BaseSpoon:start() end
 function BaseSpoon:stop() end
 function BaseSpoon:init() end
+
+-- Extend method that all "sub spoons" must call to create their base instance.
+function BaseSpoon:new()
+    local subSpoon = {}
+    setmetatable( subSpoon, BaseSpoon_mt )
+    return subSpoon 
+end
 
 return BaseSpoon;

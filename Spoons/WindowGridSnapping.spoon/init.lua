@@ -1,6 +1,7 @@
+-- Load Dependencies
+local BaseSpoon = require "Util/BaseSpoon"
 -- Spoon Container Object
-local obj = {}
-obj.__index = obj
+local obj = BaseSpoon.new()
 
 -- Spoon Metadata
 obj.name = "WindowGradSnapping"
@@ -59,25 +60,6 @@ end
 function obj:windowAtRight(win)
     local cell = hs.grid.get(win)
     return (cell.x + cell.w) == self.grid.columns
-end
-
-function obj:bindHotkeys(hyper)
-    local hyper_types = {"primary", "secondary"}
-    local def = {}
-    local map = {}
-
-    for i, type in ipairs(hyper_types) do
-        for key, name in pairs(self.hotkeys[type]) do
-            map[name] = { hyper[type], key}
-            local dispatch = function()
-                return self[name](self)
-            end
-
-            def[name] = dispatch
-        end
-    end
-
-    hs.spoons.bindHotkeysToSpec(def, map)
 end
 
 function obj:maximize()
