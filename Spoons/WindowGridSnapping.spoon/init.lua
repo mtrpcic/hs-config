@@ -1,5 +1,7 @@
 -- Load Dependencies
 local BaseSpoon = require "Util/BaseSpoon"
+local Window    = require "Util/Window"
+
 -- Spoon Container Object
 local obj = BaseSpoon.new()
 
@@ -12,7 +14,7 @@ obj.author = "Mike Trpcic"
 obj.grid = {
     rows = 3,
     columns = 4,
-    margins = 1
+    margins = 0
 }
 
 -- Hotkey Definition (All keys inherit hyper)
@@ -36,43 +38,19 @@ obj.hotkeys = {
     }
 }
 
--- Utility Methods
-function getActiveWindow()
-    return hs.application.frontmostApplication():focusedWindow()    
-end
-
 -- Spoon Methods
-function obj:windowAtTop(win)
-    local cell = hs.grid.get(win)
-    return cell.y == 0
-end
-
-function obj:windowAtBottom(win)
-    local cell = hs.grid.get(win)
-    return (cell.y + cell.h) == self.grid.rows
-end
-
-function obj:windowAtLeft(win)
-    local cell = hs.grid.get(win)
-    return cell.x == 0
-end
-
-function obj:windowAtRight(win)
-    local cell = hs.grid.get(win)
-    return (cell.x + cell.w) == self.grid.columns
-end
 
 function obj:maximize()
-    hs.window.maximize(getActiveWindow())
+    hs.window.maximize(Window.getActiveWindow())
 end
 
 function obj.snap()
-    hs.grid.snap(getActiveWindow())
+    hs.grid.snap(Window.getActiveWindow())
 end
 
 function obj:flexLeft()
-    local win = getActiveWindow()
-    if self:windowAtLeft(win) then
+    local win = Window.getActiveWindow()
+    if Window.isAtLeft(win, self.grid.margins) then
         hs.grid.resizeWindowThinner(win)
     else
         self:moveLeft()
@@ -81,8 +59,8 @@ function obj:flexLeft()
 end
 
 function obj:flexRight()
-    local win = getActiveWindow()
-    if self:windowAtRight(win) then
+    local win = Window.getActiveWindow()
+    if Window.isAtRight(win, self.grid.margins) then
         hs.grid.resizeWindowThinner(win)
         self:moveRight()
     else
@@ -91,8 +69,8 @@ function obj:flexRight()
 end
 
 function obj:flexUp()
-    local win = getActiveWindow()
-    if self:windowAtTop(win) then
+    local win = Window.getActiveWindow()
+    if Window.isAtTop(win, self.grid.margins) then
         hs.grid.resizeWindowShorter(win)
     else
         self:moveUp()
@@ -101,9 +79,8 @@ function obj:flexUp()
 end
 
 function obj:flexDown()
-    local win = getActiveWindow()
-    if self:windowAtBottom(win) then
-        print("At the bottom")
+    local win = Window.getActiveWindow()
+    if Window.isAtBottom(win, self.grid.margins) then
         hs.grid.resizeWindowShorter(win)
         self:moveDown()
     else
@@ -112,28 +89,28 @@ function obj:flexDown()
 end
 
 function obj:moveLeft()
-    hs.grid.pushWindowLeft(getActiveWindow())
+    hs.grid.pushWindowLeft(Window.getActiveWindow())
 end
 
 function obj:moveRight()
-    hs.grid.pushWindowRight(getActiveWindow())
+    hs.grid.pushWindowRight(Window.getActiveWindow())
 end
 
 function obj:moveUp()
-    hs.grid.pushWindowUp(getActiveWindow())
+    hs.grid.pushWindowUp(Window.getActiveWindow())
 end
 
 function obj:moveDown()
-    hs.grid.pushWindowDown(getActiveWindow())
+    hs.grid.pushWindowDown(Window.getActiveWindow())
 end
 
 function obj:nextScreen()
-    local win = getActiveWindow()
+    local win = Window.getActiveWindow()
     win:moveToScreen(win:screen():next())
 end
 
 function obj:prevScreen()
-    local win = getActiveWindow()
+    local win = Window.getActiveWindow()
     win:moveToScreen(win:screen():previous())
 end
 
