@@ -38,6 +38,8 @@ obj.hotkeys = {
     }
 }
 
+obj.replaceFullscreenWithMaximize = false
+
 -- Spoon Methods
 
 function obj:maximize()
@@ -93,7 +95,9 @@ function obj:moveLeft()
 end
 
 function obj:moveRight()
-    hs.grid.pushWindowRight(Window.getActiveWindow())
+    local win = Window.getActiveWindow()
+    hs.grid.pushWindowRight(win)
+    Window.ensureOnScreen(win)
 end
 
 function obj:moveUp()
@@ -101,7 +105,9 @@ function obj:moveUp()
 end
 
 function obj:moveDown()
-    hs.grid.pushWindowDown(Window.getActiveWindow())
+    local win = Window.getActiveWindow()
+    hs.grid.pushWindowDown(win)
+    Window.ensureOnScreen(win)
 end
 
 function obj:nextScreen()
@@ -114,10 +120,31 @@ function obj:prevScreen()
     win:moveToScreen(win:screen():previous())
 end
 
+function obj:bindFullScreenMaximize()
+    hs.window.filter.default:subscribe("windowFullscreened", function(win, appName, evt)
+        Window.maximize(win:setFullScreen(false))
+    end, true)
+end
+
+function obj:unbindFullscreenMaximize()
+    hs.window.filter.default.unsubscribe("windowFullscreened")
+end
+
 function obj:start()
     hs.grid.setGrid(self.grid.columns .. "x" .. self.grid.rows)
     hs.grid.setMargins(self.grid.margins .. "x" ..self.grid.margins)
     hs.window.animationDuration = 0
+    
+    if self.replaceFullscreenWithMaximize then
+        self:bindFullScreenMaximize()
+    end
+end
+
+function obj:stop()
+    if self.replaceFullscreenWithMaximize then
+        self:unbindFullscreenMaximize()
+    end
+    
 end
 
 return obj

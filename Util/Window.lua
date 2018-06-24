@@ -51,4 +51,11 @@ function Window.isAtRight(win, withinMargin)
     return Window.isAt(win, withinMargin, "right")
 end
 
+-- Ensure the window is fully on the screen
+function Window.ensureOnScreen(win)
+    if not win:frame():inside(win:screen():frame()) then
+        win:moveToScreen(win:screen(), true, true)
+    end
+end
+
 return Window
