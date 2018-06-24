@@ -5,16 +5,32 @@
 
 local Point = {}
 
-function Point.isAtTop(point, withinMargin)
+Point.isAtMap = {
+    top    = function(point, parent, margin) return (point.y - parent.y <= margin) end,
+    bottom = function(point, parent, margin) return (point.y >= parent.h - margin) end,
+    left   = function(point, parent, margin) return (point.x - parent.x - margin <= 0) end,
+    right  = function(point, parent, margin) return (point.x >= parent.w - margin) end
+}
+
+function Point.isAt(point, parent, margin, spot)
+    return Point.isAtMap[spot](point, parent, margin)
 end
 
-function Point.isAtBottom(point, withinMargin)
+-- Named methods for specifity edge checking
+function Point.isAtTop(point, frame, withinMargin)
+    return Point.isAt(point, frame, withinMargin, "top")
 end
 
-function Point.isAtLeft(point, withinMargin)
+function Point.isAtBottom(point, frame, withinMargin)
+    return Point.isAt(point, frame, withinMargin, "bottom")
 end
 
-function Point.isAtRight(point, withinMargin)
+function Point.isAtLeft(point, frame, withinMargin)
+    return Point.isAt(point, frame, withinMargin, "left")
+end
+
+function Point.isAtRight(point, frame, withinMargin)
+    return Point.isAt(point, frame, withinMargin, "right")
 end
 
 
