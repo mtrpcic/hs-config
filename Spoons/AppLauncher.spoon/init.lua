@@ -1,6 +1,9 @@
+-- Load Dependencies
+local BaseSpoon = require "Util/BaseSpoon"
+local Window    = require "Util/Window"
+
 -- Spoon Container Object
-local obj = {}
-obj.__index = obj
+local obj = BaseSpoon.new()
 
 -- Spoon Metadata
 obj.name = "AppLauncher"

@@ -12,9 +12,9 @@ local config = {
 local spoons = {
     ConfigReloader = true,
     WindowGridSnapping = true,
-    --WindowMouseSnapping = true,
-    AppLauncher = true,
-    SpacesManagement = false
+    WindowMouseSnapping = true,
+    AppLauncher = true
+    --SpacesManagement = false
 }
 
 -- Import Configured Spoons
@@ -23,5 +23,6 @@ for spoonName, enabled in pairs(spoons) do
         hs.loadSpoon(spoonName)
         spoon[spoonName].start(spoon[spoonName])
         spoon[spoonName].bindHotkeys(spoon[spoonName], hyper)
+        spoon[spoonName].bindMouseEvents(spoon[spoonName])
     end
 end

@@ -3,8 +3,7 @@ local BaseSpoon = require "Util/BaseSpoon"
 local Window    = require "Util/Window"
 
 -- Spoon Container Object
-local obj = {}
-obj.__index = obj
+local obj = BaseSpoon.new()
 
 -- Spoon Metadata
 obj.name = "ConfigReloader"
@@ -150,7 +149,6 @@ function obj:start()
     end
 
     hs.window.setFrameCorrectness = true
-    self:bindMouseEvents()
 end
 
 function obj:stop()
