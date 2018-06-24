@@ -1,3 +1,7 @@
+-- Load Dependencies
+local BaseSpoon = require "Util/BaseSpoon"
+local Window    = require "Util/Window"
+
 -- Spoon Container Object
 local obj = {}
 obj.__index = obj
@@ -43,35 +47,6 @@ function getActiveWindow()
 end
 
 -- Spoon Methods
-function obj:bindHotkeys(hyper)
-    local hyper_types = {"primary", "secondary"}
-    local def = {}
-    local map = {}
-
-    for i, type in ipairs(hyper_types) do
-        for key, name in pairs(self.hotkeys[type]) do
-            map[name] = { hyper[type], key}
-            local dispatch = function()
-                return self[name](self)
-            end
-            def[name] = dispatch
-        end
-    end
-
-    hs.spoons.bindHotkeysToSpec(def, map)
-end
-
-function obj:bindMouseEvents()
-    for event_name, method_name in pairs(self.mouseEvents) do
-        local dispatch = function()
-            return self[method_name](self)
-        end
-        local event = hs.eventtap.new({hs.eventtap.event.types[event_name]}, dispatch)
-        table.insert(self.activeEvents, event)
-        event:start()
-    end
-end
-
 function obj:isMouseAtTop(coords, frame)
     return coords.y < self.monitorEdgeSensitivity
 end
