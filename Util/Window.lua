@@ -58,4 +58,11 @@ function Window.ensureOnScreen(win)
     end
 end
 
+-- Determines if the given window is currently being dragged by comparing the current window
+-- state to a previous mouse position state (e.g. if the mouse is dragging, and the mouse is staying)
+-- in the same position within the window frame, the window must be dragging as well)
+function Window.isBeingDragged(win, compare)
+
+end
+
 return Window

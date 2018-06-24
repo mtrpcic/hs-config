@@ -1,6 +1,8 @@
 -- Load Dependencies
 local BaseSpoon = require "Util/BaseSpoon"
 local Window    = require "Util/Window"
+local Point     = require "Util/Point"
+local Math     = require "Util/Math"
 
 -- Spoon Container Object
 local obj = BaseSpoon.new()
@@ -26,51 +28,27 @@ obj.hotkeys = {
     }
 }
 
--- Internal Variables
+-- Mouse Event Mapping
 obj.mouseEvents = {
     ['leftMouseDragged'] = "onMouseDrag",
     ['leftMouseUp'] = "onMouseUp"
 }
 
+-- Internal variables
 obj.activeEvents = {}
 obj.windowTitlebarHeight = 21
 obj.monitorEdgeSensitivity = 5
 
--- Utility Methods
-function round(num)
-	return math.floor(num + 0.5)
-end
-
-function getActiveWindow()
-    return hs.application.frontmostApplication():focusedWindow()    
-end
-
--- Spoon Methods
-function obj:isMouseAtTop(coords, frame)
-    return coords.y < self.monitorEdgeSensitivity
-end
-
-function obj:isMouseAtBottom(coords, frame)
-    return coords.y > frame.h - self.monitorEdgeSensitivity
-end
-
-function obj:isMouseAtLeft(coords, frame)
-    return coords.x < self.monitorEdgeSensitivity
-end
-
-function obj:isMouseAtRight(coords, frame)
-    return coords.x > frame.w - self.monitorEdgeSensitivity
-end
-
+-- Method to be called when a mouse drag event
 function obj:onMouseDrag()
     if not self.draggingStatus then
-        local win = getActiveWindow()
+        local win = Window.getActiveWindow()
 
         if win ~= nil then
             -- Check if mouse is in titlebar
             local m = hs.mouse.getAbsolutePosition()
-            local mx = round(m.x)
-            local my = round(m.y)
+            local mx = Math.round(m.x)
+            local my = Math.round(m.y)
 
             local f = win:frame()
 
@@ -84,23 +62,25 @@ function obj:onMouseDrag()
     end
 end
 
+-- Method to be called when the mouse "click" is released. This method is a no-op
+-- unless we previously recorded that the mouse was dragging.
 function obj:onMouseUp()
     if self.draggingStatus then
         local m = hs.mouse.getAbsolutePosition()
-        local win = getActiveWindow()
+        local win = Window.getActiveWindow()
         local max = win:screen():frame()
 
-        --if round(m.x) == 0 or round(m.x) == max.w or round(m.y) == 0 or round(m.y) == max.h then
-        self:applySnap(win, m, max)
-        --end
+        if Math.round(m.x) == 0 or Math.round(m.x) == max.w or Math.round(m.y) == 0 or Math.round(m.y) == max.h then
+            self:applySnap(win, m, max)
+        end
 
         self.draggingStatus = false
         self.draggingWindow = nil
     end
 end
 
-
-
+-- Apply the snap to the window. This method will calculate the appropriate height, width, and coordinates
+-- of window origin and apply them to the window.
 function obj:applySnap(win, coords, max)
     local width = max.w
     local height = max.h
@@ -108,25 +88,25 @@ function obj:applySnap(win, coords, max)
     local y = 0
     local flag = false
 
-    if self:isMouseAtTop(coords, max) then
+    if Point.isAtTop(coords, max, self.monitorEdgeSensitivity) then
         flag = true
-        if self:isMouseAtLeft(coords, max) or self:isMouseAtRight(coords, max) then
+        if Point.isAtLeft(coords, max, self.monitorEdgeSensitivity) or Point.isAtRight(coords, max, self.monitorEdgeSensitivity) then
             height = height / 2
         end
     end
 
-    if self:isMouseAtBottom(coords, max) then
+    if Point.isAtBottom(coords, max, self.monitorEdgeSensitivity) then
         height = height / 2
         y = height
         flag = true
     end
 
-    if self:isMouseAtLeft(coords, max) then
+    if Point.isAtLeft(coords, max, self.monitorEdgeSensitivity) then
         width = width / 2
         flag = true
     end
 
-    if self:isMouseAtRight(coords, max) then
+    if Point.isAtRight(coords, max, self.monitorEdgeSensitivity) then
         width = width / 2
         x = width
         flag = true
@@ -134,11 +114,12 @@ function obj:applySnap(win, coords, max)
 
     if flag then
         local frame = win:frame()
-        frame.x = round(x)
-        frame.y = round(y)
-        frame.w = round(width)
-        frame.h = round(height)
+        frame.x = Math.round(x)
+        frame.y = Math.round(y)
+        frame.w = Math.round(width)
+        frame.h = Math.round(height)
         win:setFrameWithWorkarounds(frame)
+        Window.ensureOnScreen(win)
     end
 end
 
