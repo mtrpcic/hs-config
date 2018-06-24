@@ -34,7 +34,8 @@ obj.hotkeys = {
         left  = "moveLeft",
         right = "moveRight",
         up    = "moveUp",
-        down  = "moveDown"
+        down  = "moveDown",
+        S     = "snapAll",
     }
 }
 
@@ -48,6 +49,15 @@ end
 
 function obj.snap()
     hs.grid.snap(Window.getActiveWindow())
+    Window.ensureOnScreen(win)
+end
+
+function obj.snapAll()
+    local wins = hs.window.visibleWindows()
+    for i,win in ipairs(wins) do
+        hs.grid.snap(win)
+        Window.ensureOnScreen(win)
+    end
 end
 
 function obj:flexLeft()
