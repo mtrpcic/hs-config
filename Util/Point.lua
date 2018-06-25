@@ -33,5 +33,19 @@ function Point.isAtRight(point, frame, withinMargin)
     return Point.isAt(point, frame, withinMargin, "right")
 end
 
+function Point.isAtEdge(point, frame, withinMargin)
+    return Point.isAtTop(point, frame, withinMargin) or
+           Point.isAtBottom(point, frame, withinMargin) or
+           Point.isAtRight(point, frame, withinMargin) or
+           Point.isAtLeft(point, frame, withinMargin)
+end
+
+-- Calculate the relative point coordinates within a frame
+function Point.getRelativeCoords(point, frame)
+    return hs.geometry.new({
+        x = point.x - frame.x,
+        y = point.y - frame.y
+    })
+end
 
 return Point
