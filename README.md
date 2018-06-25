@@ -15,7 +15,7 @@ You can change which Spoons get loaded in `init.lua`. Each spoon has it's own `i
 #### Modules
 Select which modules you want to 
 
-##### Key Binding
+#### Key Binding
 You define your main key mapping modifier in `init.lua` (named `hyper`. The dafault configuration is below.
 
 ```lua
@@ -29,19 +29,20 @@ This will be injected into all of the Spoon modules, so as they define their own
 
 ### Usage
 
-##### Congig Reloading
+#### Congig Reloading
 This Hammerspoon setup will automatically reload the configuration 
 
 |Key Binding|Action|
 |---|---|
 |`primary + R`|Manually tell Hammerspoon to reload the config|
 
-##### Window Grid
+#### Window Grid
 This config also includes a window grid setup. You can snap windows to the grid, move them around, and resize them all with keyboard shortcuts. These operations always take action on the currently focused window. If that window is unable to be resized (like certain system modals), nothing will happen.
 
 |Key Binding|Action|
 |---|---|
 |`primary + S`| Snap the current window to the nearest grid cell|
+|`secondary + S`| Snap all windows to the grid|
 |`primary + M`| Maximize the current window (take up the full screen without going "full screen")|
 |`primary + N`| Move the current window to the next screen|
 |`primary + P`| Move the current window to the previous screen|
@@ -54,7 +55,7 @@ This config also includes a window grid setup. You can snap windows to the grid,
 |`secondary + left`| Move the current active window left one cell|
 |`secondary + right`| Move the current active window right one cell|
 
-##### Window Snapping (In Dev)
+#### Window Snapping
 Sometimes in the heat of the moment, you just jump to the mouse. This config includes mouse-based window snapping. This feature is currently disabled, pending some bug fixes for multi-monitor setups
 
 |Key Binding|Action|
@@ -70,7 +71,7 @@ Sometimes in the heat of the moment, you just jump to the mouse. This config inc
 
 _Note: Window Snapping currently works, but has issues with multiple monitors._
 
-##### AppLauncher
+#### AppLauncher
 You can define one-command shortcuts to open any applications here. There are no standard hotkeys, but you can define any hotkey you want (just be careful you don't conflict with one of the defined keys above).
 
 Apps are opened with a "Launch or Focus" directive. If the app is already opened, the most recently focused window will be given focus.
@@ -81,7 +82,7 @@ Apps are opened with a "Launch or Focus" directive. If the app is already opened
 |`primary + C`| (Default Config) Open Google Chrome. This can be changed in `Spoons/AppLaunder.spoon/init.lua` |
 |`primary + T`| (Default Config) Open iTerm2. This can be changed in `Spoons/AppLaunder.spoon/init.lua` |
 
-##### Workspaces (In Dev)
+#### Workspaces (In Dev)
 Workspaces makes use of the undocumented [Spaces API](https://github.com/asmagill/hs._asm.undocumented.spaces), and allows you to name and define a list of applications that should be available for a specific space.
 
 Define workspaces in `Spoons/Workspaces.spoon/init.lua` with the following format:
@@ -103,10 +104,10 @@ obj.workspaces = {
 |`primary + W`| Open a text dialog, allowing you to name the workspace you would like to apply to the current space |
 |`secondary + W`| Reset the workspace that has been assigned to this space. If no Workspace is assigned, you will be prompted for one |
 
-##### Third Party Spoons/Modules
+#### Third Party Spoons/Modules
 All of the Spoons included in this repository are custom built, but it's easy to include third party Spoons as well. If they adhere to the recommended API format, you can simply install the Spoon and then add it to the `spoons` table in `init.lua` and it will automatically be imported, keybound, and started. 
 
-If you want to include a non-standard spoon or module, install it as usual, and then add custom code to the bottom of `init.lua` to handle inegrating it into your setup.
+If you want to include a non-standard spoon or module, install it as usual, and then add custom code to the bottom of `init.lua` to handle integrating it into your setup.
 
 
 ### Pro Tips
