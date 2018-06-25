@@ -82,6 +82,16 @@ Apps are opened with a "Launch or Focus" directive. If the app is already opened
 |`primary + C`| (Default Config) Open Google Chrome. This can be changed in `Spoons/AppLaunder.spoon/init.lua` |
 |`primary + T`| (Default Config) Open iTerm2. This can be changed in `Spoons/AppLaunder.spoon/init.lua` |
 
+#### ClipboardPro (In Dev)
+This config also provides an advanced "multi-clipboard". By pressing the primary keybind, you will be presented with a chooser where you can select any of the most recent `n` clipboard items and either paste them directly into your currently active window, or re-copy them to the main system clipboard. Items are automatically added to ClipboardPro when they are copied via the system copy event. You can change the number of items that stay in the history by changing the internal `historyCount` variable (which defaults to 5).
+
+|Key Binding|Action|
+|---|---|
+|`primary + V`| Show the ClipboardPro chooser to select from the clipboard history |
+|`secondary + V`| Clear the ClipboardPro history |
+
+_Note: ClipboardPro only works for text based copy events_
+
 #### Workspaces (In Dev)
 Workspaces makes use of the undocumented [Spaces API](https://github.com/asmagill/hs._asm.undocumented.spaces), and allows you to name and define a list of applications that should be available for a specific space.
 
