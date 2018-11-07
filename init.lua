@@ -12,7 +12,7 @@ local config = {
 local spoons = {
     ConfigReloader = true,
     WindowGridSnapping = true,
-    WindowMouseSnapping = true,
+    --WindowMouseSnapping = true,
     AppLauncher = true
     --SpacesManagement = false
 }

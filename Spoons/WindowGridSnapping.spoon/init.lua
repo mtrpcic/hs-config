@@ -17,6 +17,11 @@ obj.grid = {
     margins = 0
 }
 
+obj.centerSize = {
+    w = 1000,
+    h = 600
+}
+
 -- Hotkey Definition (All keys inherit hyper)
 obj.hotkeys = {
     primary = {
@@ -27,7 +32,8 @@ obj.hotkeys = {
         M     = "maximize",
         S     = "snap",
         N     = "nextScreen",
-        P     = "prevScreen"
+        P     = "prevScreen",
+        C     = "center"
     },
 
     secondary = {
@@ -128,6 +134,19 @@ end
 function obj:prevScreen()
     local win = Window.getActiveWindow()
     win:moveToScreen(win:screen():previous())
+end
+
+function obj:center()
+    local win = Window.getActiveWindow()
+    local screenFrame = win:screen():frame()
+    local newWinFrame = hs.geometry.copy(win:frame())
+
+    newWinFrame.h = self.centerSize.h
+    newWinFrame.w = self.centerSize.w
+    newWinFrame.x = (screenFrame.w / 2) - (newWinFrame.w / 2)
+    newWinFrame.y = (screenFrame.h / 2) - (newWinFrame.h / 2)
+
+    win:move(newWinFrame):setSize(newWinFrame):setFrame(newWinFrame)
 end
 
 function obj:bindFullScreenMaximize()
